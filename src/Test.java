@@ -8,7 +8,7 @@ public class Test {
         String action = "";
         String choice = "";
         while (continuee.equals("YES")) {
-            System.out.println("What do you want to do? CREATE PERSON(1) | UPDATE VALUES(2)");
+            System.out.println("What do you want to do? CREATE PERSON(1) | ADD VALUES(2) | UPDATE VALUES(3)");
             action = scanner.nextLine();
             int number;
             switch (action) {
@@ -19,8 +19,29 @@ public class Test {
                     personList.get(personList.size() - 1).addRole();
                     personList.get(personList.size() - 1).addPhoneNumber();
                     break;
-
                 case "2":
+                    System.out.println("Enter person number: ");
+                    for(int i = 0; i < personList.size(); i++){
+                        System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
+                                + personList.get(i).getSurname());
+                    }
+                    number = scanner.nextInt() - 1;
+                    System.out.println("What value do you want to add? role(1) | phone number(2)");
+                    choice = scanner.nextLine();  // Почему-то если оставить один сканнер, то он не срабатывает
+                    choice = scanner.nextLine();
+                    switch (choice){
+                        case "1":
+                            personList.get(number).addRole();
+                            break;
+                        case "2":
+                            personList.get(number).addPhoneNumber();
+                            break;
+                        default:
+                            System.out.println("Something went wrong");
+                    }
+
+                    break;
+                case "3":
                     System.out.println("Enter person number: ");
                     for(int i = 0; i < personList.size(); i++){
                         System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
@@ -29,7 +50,7 @@ public class Test {
                     number = scanner.nextInt() - 1;
                     System.out.println("What value do you want to update? Name(1) | Surname(2) | " +
                             "email(3) | roles(4) | phone numbers(5)");
-                    choice = scanner.nextLine();  // Почему-то если оставить один сканнер, то он не срабатывает
+                    choice = scanner.nextLine();
                     choice = scanner.nextLine();
                     switch (choice){
                         case "1":

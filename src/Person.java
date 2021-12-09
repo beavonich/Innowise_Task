@@ -30,7 +30,7 @@ public class Person {
             role = scanner.nextLine();
             if(roles.size() == 1){
                 if(allUserRoles.getRoleValue(role) == 3){
-                    System.out.println("You can't to add this role for this user");
+                    System.out.println("You can't add this role for this user");
                     return;
                 }
                 if(allUserRoles.getRoleValue(role) + roles.values().iterator().next() == 3
