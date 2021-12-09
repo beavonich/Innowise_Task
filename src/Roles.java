@@ -12,6 +12,10 @@ public class Roles {
         roles.put("SUPER_ADMIN", 3);
     }
 
+    public static Map<String, Integer> getRoles() {
+        return roles;
+    }
+
     public static int getRoleValue(String role) {
         return roles.get(role);
     }
