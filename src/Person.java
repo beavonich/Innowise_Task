@@ -29,8 +29,8 @@ public class Person {
 
         while(accept.equals("1") || accept.equals("YES")) {
             System.out.println("Choose role: ");
-            for(Map.Entry<String, Integer> m : Roles.getRoles().entrySet()){
-                System.out.println(m.getKey() + ": lvl " + m.getValue());
+            for(Map.Entry<String, Integer> roles : Roles.getRoles().entrySet()){
+                System.out.println(roles.getKey() + ": lvl " + roles.getValue());
             }
             role = scanner.nextLine();
             if(roles.size() == 1){
@@ -62,16 +62,16 @@ public class Person {
 
     public void updateRole(){
         System.out.println("At this moment the person has role(s): ");
-        for(Map.Entry<String, Integer> hm : roles.entrySet()){
-            System.out.println(hm.getKey());
+        for(Map.Entry<String, Integer> personRole : roles.entrySet()){
+            System.out.println(personRole.getKey());
         }
         System.out.println("Enter role, which you want to replace");
         String role = scanner.nextLine();
         String newRole;
         if(roles.size() == 1){
             System.out.println("Choose role: ");
-            for(Map.Entry<String, Integer> m : Roles.getRoles().entrySet())
-                System.out.println(m.getKey() + ": lvl " + m.getValue());
+            for(Map.Entry<String, Integer> personRole : Roles.getRoles().entrySet())
+                System.out.println(personRole.getKey() + ": lvl " + personRole.getValue());
             newRole = scanner.nextLine();
             if(Roles.getRoleValue(newRole) > 0){
                 roles.put(newRole, roles.remove(role));
@@ -80,9 +80,9 @@ public class Person {
             }
         }else{
             System.out.println("You can replace this role on");
-            for(Map.Entry<String, Integer> m : Roles.getRoles().entrySet()){
-                if(m.getValue() == Roles.getRoleValue(role))
-                    System.out.println(m.getKey() + ": lvl " + m.getValue());
+            for(Map.Entry<String, Integer> replacedRole : Roles.getRoles().entrySet()){
+                if(replacedRole.getValue() == Roles.getRoleValue(role))
+                    System.out.println(replacedRole.getKey() + ": lvl " + replacedRole.getValue());
             }
             newRole = scanner.nextLine();
             if(Roles.getRoleValue(newRole) == Roles.getRoleValue(role)){
@@ -93,6 +93,29 @@ public class Person {
 
 
         }
+    }
+
+    public void updatePhoneNumber(){
+        System.out.println("At this moment the person has phone number(s): ");
+        for(int i = 0; i < phoneNumbers.length; i++){
+            if(phoneNumbers[i] == null){
+                break;
+            }else{
+                System.out.println((i + 1) + ") " + phoneNumbers[i]);
+            }
+        }
+        System.out.println("Enter number of phone number, which you want to replace");
+        int numberOfPhoneNumber = scanner.nextInt();
+        try{
+            System.out.println("Enter new phone-number");
+            String newPhoneNumber = scanner.nextLine();
+            newPhoneNumber = scanner.nextLine();
+            phoneNumbers[numberOfPhoneNumber - 1] = newPhoneNumber;
+            System.out.println("The phone number has been updated successfully");
+        }catch (Exception e){
+            System.out.println("Something went wrong");
+        }
+
     }
 
     public String getPhoneNumbers() {
@@ -164,12 +187,22 @@ public class Person {
         this.surname = surname;
     }
 
+    public String getNameAndSurname(){
+        return this.getName() + " "  + this.getSurname();
+    }
+
+    public static void getListOfPeople(List<Person> personList){
+        for(int i = 0; i < personList.size(); i++){
+            System.out.println((i + 1) + ") " + personList.get(i).getNameAndSurname());
+        }
+    }
+
     @Override
     public String toString() {
         String roles = "";
         String phoneNumberss = "";
-        for(Map.Entry<String, Integer> hm: this.roles.entrySet()){
-            roles += "\n" + hm.getKey();
+        for(Map.Entry<String, Integer> personRole : this.roles.entrySet()){
+            roles += "\n" + personRole.getKey();
         }
         for(String phone : phoneNumbers){
             if(phone == null){

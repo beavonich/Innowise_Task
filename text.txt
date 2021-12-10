@@ -1,10 +1,11 @@
 Person 
-name is g
-surname is h
-email: aaaaa@gmail.com
+name is a
+surname is b
+email: andrey@gmail.com
 role(s): 
-ADMIN
+USER
 phone number(s): 
+375431026433
 375336270153
 
 
