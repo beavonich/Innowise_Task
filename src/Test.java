@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Test {
@@ -10,7 +13,16 @@ public class Test {
 
     }
 
-    public void action(List<Person> personList) {
+    public static void writeInFile(List<Person> personList, String path) throws FileNotFoundException {
+        File file1 = new File(path);
+        PrintWriter pw = new PrintWriter(file1);
+        for(Person person : personList){
+            pw.println(person.toString());
+        }
+        pw.close();
+    }
+
+    public void action(List<Person> personList) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
 
         String continuee = "1";
@@ -104,6 +116,8 @@ public class Test {
                 default:
                     System.out.println("Something went wrong");
             }
+
+            Test.writeInFile(personList, "text.txt");
 
             System.out.println("Do you want to continue? Enter YES(1) or NO(2)");
 

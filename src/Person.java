@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Person {
@@ -18,9 +21,7 @@ public class Person {
         personList.remove(index);
     }
 
-    public void writeInFile(){
 
-    }
 
     public void addRole(){
         String accept = "1";
