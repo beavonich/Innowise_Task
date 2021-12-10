@@ -18,8 +18,11 @@ public class Action {
             int number;
             switch (action) {
                 case "1":
-                    System.out.println("Enter name and surname using enter key");
-                    personList.add(new Person(scanner.nextLine(), scanner.nextLine()));
+                    personList.add(new Person(null, null));
+                    System.out.println("Enter name: ");
+                    personList.get(personList.size() - 1).updateName();
+                    System.out.println("Enter surname: ");
+                    personList.get(personList.size() - 1).updateSurname();
                     personList.get(personList.size() - 1).setEmail();
                     personList.get(personList.size() - 1).addRole();
                     personList.get(personList.size() - 1).addPhoneNumber();
@@ -86,7 +89,6 @@ public class Action {
                     for(int i = 0; i < personList.size(); i++){
                         System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
                                 + personList.get(i).getSurname());
-                        System.out.println(personList.get(i).toString());
                     }
                     int index = scanner.nextInt() - 1;
                     try{
@@ -96,7 +98,7 @@ public class Action {
                         System.out.println("Something went wrong");
                     }
 
-                    continuee = scanner.nextLine(); // Опять проблема со scanner
+                    continuee = scanner.nextLine();
                     break;
                 case "5":
                     Person.getListOfPeople(personList);

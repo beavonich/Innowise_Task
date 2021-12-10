@@ -13,15 +13,41 @@ public class Person {
     Roles allUserRoles = new Roles();
     Scanner scanner = new Scanner(System.in);
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void updateName(){
+        this.name = scanner.nextLine();
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+    public void updateSurname(){
+        this.surname = scanner.nextLine();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail() {
+        String email = "";
+        System.out.println("Enter email: ");
+        email = scanner.nextLine();
+        if(email.matches("[\\w\\W]+@\\w+\\.\\w+")){
+            this.email = email;
+            System.out.println("Email has been added successfully ");
+        }else{
+            System.out.println("The email has not be added");
+        }
+    }
+
     public HashMap<String, Integer> getRoles() {
         return roles;
     }
-
-    public static void deletePerson(List<Person> personList, int index){
-        personList.remove(index);
-    }
-
-
 
     public void addRole(){
         String accept = "1";
@@ -33,89 +59,98 @@ public class Person {
                 System.out.println(roles.getKey() + ": lvl " + roles.getValue());
             }
             role = scanner.nextLine();
-            if(roles.size() == 1){
-                if(allUserRoles.getRoleValue(role) == 3){
-                    System.out.println("You can't add this role for this user");
-                    return;
-                }
-                if(allUserRoles.getRoleValue(role) + roles.values().iterator().next() == 3
-                        && Roles.getRoleValue(role) > 0){
+            try {
+                if(roles.size() == 1){
+                    if (allUserRoles.getRoleValue(role) == 3) {
+                        System.out.println("You can't add this role for this user");
+                        return;
+                    }
+                    if (allUserRoles.getRoleValue(role) + roles.values().iterator().next() == 3
+                            && Roles.getRoleValue(role) > 0) {
+                        roles.put(role, allUserRoles.getRoleValue(role));
+                        System.out.println("The role has been added successfully");
+
+                    } else {
+                        System.out.println("It's impossible to add this role for this user");
+                    }
+                }else if(roles.size() == 0 && Roles.getRoleValue(role) > 0){
+
                     roles.put(role, allUserRoles.getRoleValue(role));
-                    System.out.println("The role has been added successfully");
-                }else{
-                    System.out.println("It's impossible to add this role for this user");
+                    System.out.println("The first role has been added successfully");
+
                 }
-            }else if(roles.size() == 0 && Roles.getRoleValue(role) > 0){
-                roles.put(role, allUserRoles.getRoleValue(role));
-                System.out.println("The first role has been added successfully");
+                else{
+                    System.out.println("This user already has max count of roles");
+                }
+                if(Roles.getRoleValue(role) == 3)
+                    break;
+            }catch(Exception e) {
+                System.out.println("There is no such role");
+            }finally {
+                System.out.println("Do you want to add a new role? Enter YES(1) or NO(2)");
+                accept = scanner.nextLine();
+                continue;
             }
-            else{
-                System.out.println("This user already has max count of roles");
-            }
-            if(Roles.getRoleValue(role) == 3)
-                break;
-            System.out.println("Do you want to add another role? Enter YES(1) or NO(2)");
-            accept = scanner.nextLine();
         }
 
     }
 
     public void updateRole(){
-        System.out.println("At this moment the person has role(s): ");
-        for(Map.Entry<String, Integer> personRole : roles.entrySet()){
-            System.out.println(personRole.getKey());
-        }
-        System.out.println("Enter role, which you want to replace");
-        String role = scanner.nextLine();
-        String newRole;
-        if(roles.size() == 1){
-            System.out.println("Choose role: ");
-            for(Map.Entry<String, Integer> personRole : Roles.getRoles().entrySet())
-                System.out.println(personRole.getKey() + ": lvl " + personRole.getValue());
-            newRole = scanner.nextLine();
-            if(Roles.getRoleValue(newRole) > 0){
-                roles.put(newRole, roles.remove(role));
-            }else{
-                System.out.println("Something went wrong");
+        String accept = "1";
+        String role = "";
+
+        while(accept.equals("1") || accept.equals("YES")) {
+            System.out.println("At this moment the person has role(s): ");
+            for (Map.Entry<String, Integer> personRole : roles.entrySet()) {
+                System.out.println(personRole.getKey());
             }
-        }else{
-            System.out.println("You can replace this role on");
-            for(Map.Entry<String, Integer> replacedRole : Roles.getRoles().entrySet()){
-                if(replacedRole.getValue() == Roles.getRoleValue(role))
-                    System.out.println(replacedRole.getKey() + ": lvl " + replacedRole.getValue());
-            }
-            newRole = scanner.nextLine();
-            if(Roles.getRoleValue(newRole) == Roles.getRoleValue(role)){
-                roles.put(newRole, roles.remove(role));
-            }else{
-                System.out.println("Something went wrong");
-            }
+            System.out.println("Enter role, which you want to replace");
+            role = scanner.nextLine();
+
+            String newRole;
+            try {
+                if(roles.get(role) == null){
+                    throw new Exception();  // Чтобы в случае ненахождения этой роли, код продолжал выполняться в catch
+                };
+                if (roles.size() == 1) {
+                    System.out.println("Choose role: ");
+                    for (Map.Entry<String, Integer> personRole : Roles.getRoles().entrySet())
+                        System.out.println(personRole.getKey() + ": lvl " + personRole.getValue());
+                    newRole = scanner.nextLine();
+                    if (Roles.getRoleValue(newRole) > 0) {
+                        roles.put(newRole, roles.remove(role));
+                        System.out.println("The role has been updated successfully");
+                    } else {
+                        System.out.println("Something went wrong");
+                    }
+                } else {
+                    System.out.println("You can replace this role on");
+                    for (Map.Entry<String, Integer> replacedRole : Roles.getRoles().entrySet()) {
+                        if (replacedRole.getValue() == Roles.getRoleValue(role))
+                            System.out.println(replacedRole.getKey() + ": lvl " + replacedRole.getValue());
+                    }
+                    newRole = scanner.nextLine();
+                    if (Roles.getRoleValue(newRole) == Roles.getRoleValue(role)) {
+                        try {
+                            roles.put(newRole, roles.remove(role));
+                            System.out.println("The role has been updated successfully");
+                        } catch (Exception e) {
+                            System.out.println("No such role");
+                        }
+                    } else {
+                        System.out.println("Something went wrong");
+                    }
 
 
-        }
-    }
-
-    public void updatePhoneNumber(){
-        System.out.println("At this moment the person has phone number(s): ");
-        for(int i = 0; i < phoneNumbers.length; i++){
-            if(phoneNumbers[i] == null){
-                break;
-            }else{
-                System.out.println((i + 1) + ") " + phoneNumbers[i]);
+                }
+            }catch(Exception e) {
+                System.out.println("There is no such role");
+            }finally {
+                System.out.println("Do you want to update role? Enter YES(1) or NO(2)");
+                accept = scanner.nextLine();
+                continue;
             }
         }
-        System.out.println("Enter number of phone number, which you want to replace");
-        int numberOfPhoneNumber = scanner.nextInt();
-        try{
-            System.out.println("Enter new phone-number");
-            String newPhoneNumber = scanner.nextLine();
-            newPhoneNumber = scanner.nextLine();
-            phoneNumbers[numberOfPhoneNumber - 1] = newPhoneNumber;
-            System.out.println("The phone number has been updated successfully");
-        }catch (Exception e){
-            System.out.println("Something went wrong");
-        }
-
     }
 
     public String getPhoneNumbers() {
@@ -150,36 +185,27 @@ public class Person {
 
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail() {
-        String email = "";
-        System.out.println("Enter email: ");
-        email = scanner.nextLine();
-        if(email.matches("[\\w\\W]+@\\w+\\.\\w+")){
-            this.email = email;
-            System.out.println("Email has been added successfully ");
-        }else{
-            System.out.println("The email has not be added");
+    public void updatePhoneNumber(){
+        System.out.println("At this moment the person has phone number(s): ");
+        for(int i = 0; i < phoneNumbers.length; i++){
+            if(phoneNumbers[i] == null){
+                break;
+            }else{
+                System.out.println((i + 1) + ") " + phoneNumbers[i]);
+            }
         }
-    }
+        System.out.println("Enter number of phone number, which you want to replace");
+        int numberOfPhoneNumber = scanner.nextInt();
+        try{
+            System.out.println("Enter new phone-number");
+            String newPhoneNumber = scanner.nextLine();
+            newPhoneNumber = scanner.nextLine();
+            phoneNumbers[numberOfPhoneNumber - 1] = newPhoneNumber;
+            System.out.println("The phone number has been updated successfully");
+        }catch (Exception e){
+            System.out.println("Something went wrong");
+        }
 
-    public void updateName(){
-        this.name = scanner.nextLine();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void updateSurname(){
-        this.surname = scanner.nextLine();
-    }
-
-    public String getSurname() {
-        return surname;
     }
 
     public Person(String name, String surname) {
@@ -219,4 +245,10 @@ public class Person {
                 "role(s): " + roles + "\n" +
                 "phone number(s): " + phoneNumberss + "\n\n";
     }
+
+    public static void deletePerson(List<Person> personList, int index){
+        personList.remove(index);
+    }
+
+
 }

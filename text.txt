@@ -1,11 +1,10 @@
 Person 
-name is a
-surname is b
+name is Andrey
+surname is Bobrovskiy
 email: andrey@gmail.com
 role(s): 
-USER
+SUPER_ADMIN
 phone number(s): 
-375431026433
 375336270153
 
 
