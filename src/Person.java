@@ -6,23 +6,27 @@ public class Person {
     private String email;
     private HashMap<String, Integer> roles = new LinkedHashMap<>();
     private String[] phoneNumbers = new String[3];
-    private static int phoneCount = 0;
+    private int phoneCount = 0;
     Roles allUserRoles = new Roles();
     Scanner scanner = new Scanner(System.in);
-
-    public void deletePerson() throws Throwable {
-
-    }
 
     public HashMap<String, Integer> getRoles() {
         return roles;
     }
 
+    public static void deletePerson(List<Person> personList, int index){
+        personList.remove(index);
+    }
+
+    public void writeInFile(){
+
+    }
+
     public void addRole(){
-        String accept = "YES";
+        String accept = "1";
         String role = "";
 
-        while(accept.equals("YES")) {
+        while(accept.equals("1") || accept.equals("YES")) {
             System.out.println("Choose role: ");
             for(Map.Entry<String, Integer> m : Roles.getRoles().entrySet()){
                 System.out.println(m.getKey() + ": lvl " + m.getValue());
@@ -36,20 +40,20 @@ public class Person {
                 if(allUserRoles.getRoleValue(role) + roles.values().iterator().next() == 3
                         && Roles.getRoleValue(role) > 0){
                     roles.put(role, allUserRoles.getRoleValue(role));
-                    System.out.println("The role has been added succeed");
+                    System.out.println("The role has been added successfully");
                 }else{
                     System.out.println("It's impossible to add this role for this user");
                 }
             }else if(roles.size() == 0 && Roles.getRoleValue(role) > 0){
                 roles.put(role, allUserRoles.getRoleValue(role));
-                System.out.println("The first role has been added succeed");
+                System.out.println("The first role has been added successfully");
             }
             else{
                 System.out.println("This user already has max count of roles");
             }
             if(Roles.getRoleValue(role) == 3)
                 break;
-            System.out.println("Do you want to add another role? Enter YES or NO");
+            System.out.println("Do you want to add another role? Enter YES(1) or NO(2)");
             accept = scanner.nextLine();
         }
 
@@ -96,18 +100,27 @@ public class Person {
 
     public void addPhoneNumber() {
         String phoneNumber = "";
-        String accept = "YES";
-        while(accept.equals("YES") && phoneCount < 3){
+        String accept = "1";
+        while((accept.equals("1") || accept.equals("YES")) && phoneCount <= 3){
             System.out.println("Enter phone number: ");
             phoneNumber = scanner.nextLine();
             if(phoneNumber.matches("375\\d{9}")){
-                this.phoneNumbers[phoneCount] = phoneNumber;
-                System.out.println("Number has been added successfully");
-                phoneCount++;
+                try{
+                    this.phoneNumbers[phoneCount] = phoneNumber;
+                    System.out.println("Number has been added successfully");
+                    phoneCount++;
+                }catch (Exception e){
+                    System.out.println("This user already has max count of phone numbers");
+                }finally {
+                    System.out.println("Do you want to add a new phone number? Enter YES(1) or NO(2)");
+                    accept = scanner.nextLine();
+                    continue;
+                }
+
             }else{
                 System.out.println("Incorrect format of phone number");
             }
-            System.out.println("Do you want to add a new phone number? Enter YES or NO");
+            System.out.println("Do you want to add a new phone number? Enter YES(1) or NO(2)");
             accept = scanner.nextLine();
         }
 
@@ -148,5 +161,28 @@ public class Person {
     public Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
+    }
+
+    @Override
+    public String toString() {
+        String roles = "";
+        String phoneNumberss = "";
+        for(Map.Entry<String, Integer> hm: this.roles.entrySet()){
+            roles += "\n" + hm.getKey();
+        }
+        for(String phone : phoneNumbers){
+            if(phone == null){
+                break;
+            }else{
+                phoneNumberss += "\n" + phone;
+
+            }
+        }
+        return "Person " + "\n" +
+                "name is " + name + "\n" +
+                "surname is " + surname + "\n" +
+                "email: " + email + "\n" +
+                "role(s): " + roles + "\n" +
+                "phone number(s): " + phoneNumberss + "\n\n";
     }
 }

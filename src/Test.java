@@ -1,14 +1,24 @@
 import java.util.*;
 
 public class Test {
+    public static void main(String[] args) throws Throwable {
+        List<Person> personList = new ArrayList<>();
+        Test test = new Test();
+
+        test.action(personList);
+
+
+    }
+
     public void action(List<Person> personList) {
         Scanner scanner = new Scanner(System.in);
 
-        String continuee = "YES";
+        String continuee = "1";
         String action = "";
         String choice = "";
-        while (continuee.equals("YES")) {
-            System.out.println("What do you want to do? CREATE PERSON(1) | ADD VALUES(2) | UPDATE VALUES(3)");
+        while (continuee.equals("1") || continuee.equals("YES")) {
+            System.out.println("What do you want to do? CREATE PERSON(1) | ADD VALUES(2) | " +
+                    "UPDATE VALUES(3) | DELETE PERSON(4)");
             action = scanner.nextLine();
             int number;
             switch (action) {
@@ -18,6 +28,7 @@ public class Test {
                     personList.get(personList.size() - 1).setEmail();
                     personList.get(personList.size() - 1).addRole();
                     personList.get(personList.size() - 1).addPhoneNumber();
+
                     break;
                 case "2":
                     System.out.println("Enter person number: ");
@@ -73,25 +84,30 @@ public class Test {
                     }
 
                     break;
+                case "4":
+                    System.out.println("\nEnter person number: ");
+                    for(int i = 0; i < personList.size(); i++){
+                        System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
+                                + personList.get(i).getSurname());
+                        System.out.println(personList.get(i).toString());
+                    }
+                    int index = scanner.nextInt() - 1;
+                    try{
+                        personList.remove(index);
+                        System.out.println("Person " + (index + 1) + " has been deleted successfully");
+                    }catch (Exception e){
+                        System.out.println("Something went wrong");
+                    }
+
+                    continuee = scanner.nextLine(); // Опять проблема со scanner
+                    break;
                 default:
                     System.out.println("Something went wrong");
             }
 
-            System.out.println("Do you want to continue? Enter YES or NO");
+            System.out.println("Do you want to continue? Enter YES(1) or NO(2)");
+
             continuee = scanner.nextLine();
         }
-    }
-
-
-
-
-    public static void main(String[] args) throws Throwable {
-        List<Person> personList = new ArrayList<>();
-        Test test = new Test();
-
-        test.action(personList);
-        System.out.println(personList.get(0).getName());
-        System.out.println(personList.get(0).getSurname());
-
     }
 }
