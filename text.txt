@@ -5,18 +5,7 @@ email: andrey@gmail.com
 role(s): 
 SUPER_ADMIN
 phone number(s): 
-375336270153
-
-
-Person 
-name is Anton
-surname is Sidorov
-email: sidorov@gmail.com
-role(s): 
-ADMIN
-USER
-phone number(s): 
-375292016433
-375290124536
+375291026433
+375222222222
 
 
