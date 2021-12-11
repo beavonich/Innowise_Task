@@ -34,82 +34,106 @@ public class Action {
                         System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
                                 + personList.get(i).getSurname());
                     }
-                    number = scanner.nextInt() - 1;
-                    System.out.println("What value do you want to add? role(1) | phone number(2)");
-                    choice = scanner.nextLine();  // Почему-то если оставить один сканнер, то он не срабатывает
-                    choice = scanner.nextLine();
-                    switch (choice){
-                        case "1":
-                            personList.get(number).addRole();
-                            break;
-                        case "2":
-                            personList.get(number).addPhoneNumber();
-                            break;
-                        default:
-                            System.out.println("Something went wrong");
+
+                    try {
+                        number = scanner.nextInt() - 1;
+                        personList.get(number);
+                        System.out.println("What value do you want to add? role(1) | phone number(2)");
+                        choice = scanner.nextLine();  // Почему-то если оставить один сканнер, то он не срабатывает
+                        choice = scanner.nextLine();
+                        switch (choice) {
+                            case "1":
+                                personList.get(number).addRole();
+                                break;
+                            case "2":
+                                personList.get(number).addPhoneNumber();
+                                break;
+                            default:
+                                System.out.println("Something went wrong");
+                        }
+                    } catch(Exception e){
+                        System.out.println("Something went wrong");
+                    } finally{
+                        continuee = scanner.nextLine();
+                        break;
                     }
 
-                    break;
                 case "3":
                     System.out.println("Enter person number: ");
                     for(int i = 0; i < personList.size(); i++){
                         System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
                                 + personList.get(i).getSurname());
                     }
-                    number = scanner.nextInt() - 1;
-                    System.out.println("What value do you want to update? Name(1) | Surname(2) | " +
-                            "email(3) | roles(4) | phone numbers(5)");
-                    choice = scanner.nextLine();
-                    choice = scanner.nextLine();
-                    switch (choice){
-                        case "1":
-                            System.out.println("Enter new name");
-                            personList.get(number).updateName();
-                            break;
-                        case "2":
-                            System.out.println("Enter new surname");
-                            personList.get(number).updateSurname();
-                            break;
-                        case "3":
-                            personList.get(number).setEmail();
-                            break;
-                        case "4":
-                            personList.get(number).updateRole();
-                            break;
-                        case "5":
-                            personList.get(number).updatePhoneNumber();
-                            break;
-                        default:
-                            System.out.println("Something went wrong");
+                    try {
+                        number = scanner.nextInt() - 1;
+                        personList.get(number);
+                        System.out.println("What value do you want to update? Name(1) | Surname(2) | " +
+                                "email(3) | roles(4) | phone numbers(5)");
+                        choice = scanner.nextLine();
+                        choice = scanner.nextLine();
+                        switch (choice) {
+                            case "1":
+                                System.out.println("Enter new name");
+                                personList.get(number).updateName();
+                                break;
+                            case "2":
+                                System.out.println("Enter new surname");
+                                personList.get(number).updateSurname();
+                                break;
+                            case "3":
+                                personList.get(number).setEmail();
+                                break;
+                            case "4":
+                                personList.get(number).updateRole();
+                                break;
+                            case "5":
+                                personList.get(number).updatePhoneNumber();
+                                break;
+                            default:
+                                System.out.println("Something went wrong");
+                        }
+                    }catch (Exception e){
+                        System.out.println("Something went wrong");
+                    }finally{
+                        continuee = scanner.nextLine();
+                        break;
                     }
 
-                    break;
+
                 case "4":
                     System.out.println("\nEnter person number: ");
                     for(int i = 0; i < personList.size(); i++){
                         System.out.println((i + 1) + ") " + personList.get(i).getName() + " "
                                 + personList.get(i).getSurname());
                     }
-                    int index = scanner.nextInt() - 1;
-                    try{
+                    try {
+                        int index = scanner.nextInt() - 1;
                         personList.remove(index);
                         System.out.println("Person " + (index + 1) + " has been deleted successfully");
-                    }catch (Exception e){
+
+                    }catch(Exception e){
                         System.out.println("Something went wrong");
+                    } finally{
+                        continuee = scanner.nextLine();
+                        break;
                     }
 
-                    continuee = scanner.nextLine();
-                    break;
                 case "5":
                     Person.getListOfPeople(personList);
                     break;
                 case "6":
                     Person.getListOfPeople(personList);
-                    int personNumber = scanner.nextInt() - 1;
-                    System.out.println(personList.get(personNumber).toString());
-                    continuee = scanner.nextLine(); // Опять проблема со scanner
-
-                    break;
+                    System.out.println("Enter number of person");
+                    try {
+                        int personNumber = scanner.nextInt() - 1;
+                        System.out.println(personList.get(personNumber).toString());
+                        continuee = scanner.nextLine(); // Опять проблема со scanner
+                    }catch(Exception e){
+                        System.out.println("Something went wrong");
+                    } finally{
+                        continuee = scanner.nextLine();
+                        break;
+                    }
                 default:
                     System.out.println("Something went wrong");
             }

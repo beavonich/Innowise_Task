@@ -7,6 +7,5 @@ public class Test {
     public static void main(String[] args) throws Throwable {
         List<Person> personList = new ArrayList<>();
         Action.action(personList);
-        Action.writeInFile(personList, "text.txt");
     }
 }
