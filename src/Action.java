@@ -53,8 +53,8 @@ public class Action {
                         }
                     } catch(Exception e){
                         System.out.println("Something went wrong");
-                    } finally{
                         continuee = scanner.nextLine();
+                    } finally{
                         break;
                     }
 
@@ -94,8 +94,8 @@ public class Action {
                         }
                     }catch (Exception e){
                         System.out.println("Something went wrong");
-                    }finally{
                         continuee = scanner.nextLine();
+                    }finally{
                         break;
                     }
 
@@ -113,8 +113,8 @@ public class Action {
 
                     }catch(Exception e){
                         System.out.println("Something went wrong");
-                    } finally{
                         continuee = scanner.nextLine();
+                    } finally{
                         break;
                     }
 
@@ -130,8 +130,8 @@ public class Action {
                         continuee = scanner.nextLine(); // Опять проблема со scanner
                     }catch(Exception e){
                         System.out.println("Something went wrong");
-                    } finally{
                         continuee = scanner.nextLine();
+                    } finally{
                         break;
                     }
                 default:
