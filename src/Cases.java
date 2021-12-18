@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Cases {
     private static Scanner scanner = new Scanner(System.in);
 
+
     public static void createPerson(List<Person> personList){
         personList.add(new Person(null, null));
         System.out.println("Enter name: ");
@@ -14,6 +15,7 @@ public class Cases {
         personList.get(personList.size() - 1).addRole();
         personList.get(personList.size() - 1).addPhoneNumber();
     }
+
 
     public static void addValues(List<Person> personList, int personNumber, String choice, String continuee){
         System.out.println("Enter person number: ");
@@ -43,6 +45,7 @@ public class Cases {
             continuee = scanner.nextLine();
         }
     }
+
 
     public static void updateValues(List<Person> personList, int personNumber, String choice, String continuee){
         System.out.println("Enter person number: ");
@@ -84,6 +87,7 @@ public class Cases {
         }
     }
 
+
     public static void deletePerson(List<Person> personList, int personNumber, String continuee){
         System.out.println("\nEnter person number: ");
         for(int i = 0; i < personList.size(); i++){
@@ -100,6 +104,7 @@ public class Cases {
             continuee = scanner.nextLine();
         }
     }
+
 
     public static void getPersonInformation(List<Person> personList, int personNumber, String continuee){
         Person.getListOfPeople(personList);

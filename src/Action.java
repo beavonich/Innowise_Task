@@ -48,7 +48,6 @@ public class Action {
     }
 
 
-
     public static void writeInFile(List<Person> personList, String path) throws FileNotFoundException {
         File file1 = new File(path);
         PrintWriter pw = new PrintWriter(file1);

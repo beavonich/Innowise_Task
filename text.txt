@@ -1,11 +1,10 @@
 Person 
-name is Andrey
-surname is Bobrovskiy
-email: andrey@gmail.com
+name is max
+surname is plaxa
+email: null
 role(s): 
 SUPER_ADMIN
 phone number(s): 
-375291026433
-375222222222
+375447719392
 
 

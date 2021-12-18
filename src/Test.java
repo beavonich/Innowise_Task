@@ -4,8 +4,12 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Test {
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) {
         List<Person> personList = new ArrayList<>();
-        Action.action(personList);
+        try {
+            Action.action(personList);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

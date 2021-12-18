@@ -10,7 +10,7 @@ public class Person {
     private HashMap<String, Integer> roles = new LinkedHashMap<>();
     private String[] phoneNumbers = new String[3];
     private int phoneCount = 0;
-    Roles allUserRoles = new Roles();
+    private Roles allUserRoles = new Roles();
     Scanner scanner = new Scanner(System.in);
 
 
