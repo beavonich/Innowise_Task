@@ -34,14 +34,18 @@ public class Person {
     }
 
     public void setEmail() {
-        String email = "";
-        System.out.println("Enter email: ");
-        email = scanner.nextLine();
-        if(email.matches("[\\w\\W]+@\\w+\\.\\w+")){
-            this.email = email;
-            System.out.println("Email has been added successfully ");
-        }else{
-            System.out.println("The email has not be added");
+        boolean check = true;
+        while(check) {
+            String email = "";
+            System.out.println("Enter email: ");
+            email = scanner.nextLine();
+            if (email.matches("[\\w\\W]+@\\w+\\.\\w+")) {
+                this.email = email;
+                System.out.println("Email has been added successfully ");
+                check = false;
+            } else {
+                System.out.println("The email has not be added\n");
+            }
         }
     }
 
